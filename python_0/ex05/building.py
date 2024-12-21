@@ -7,23 +7,19 @@ class AssertionError(Exception):
 
     def __str__(self):
         return f"AssertionError: {self.message}"
-    
-# class ArgumentParserError(Exception): pass
-
-class ThrowingArgumentParser(argparse.ArgumentParser):
-    def error(self, message):
-        raise AssertionError("few args")
 
 def get_line() -> str :
     try:
-        parser = ThrowingArgumentParser(description="display the sums of a text's \
+        parser = argparse.ArgumentParser(description="display the sums of a text's \
             upper-case characters, lower-case \
             characters, punctuation characters, digits and spaces.")
-        parser.add_argument("text", help="the text to be counted")
+        parser.add_argument("text", nargs="?", help="the text to be counted")
         args, extra_args = parser.parse_known_args()
+        text = args.text
         if extra_args:
             raise AssertionError("Too much args, please put your text inside quotes!")
-        text = args.text
+        elif args.text is None:
+            text = input("What is the text to count?\n")
         return text
     except AssertionError as e:
         print(e)
