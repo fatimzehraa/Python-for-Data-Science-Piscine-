@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 class AssertionError(Exception):
     def __init__(self, message):
@@ -9,17 +10,15 @@ class AssertionError(Exception):
         return f"AssertionError: {self.message}"
 
 def get_line() -> str :
+    """get_line(): parses text to be counted as argument using argparse, and throws 
+    AssertionError if more than one argument is provided."""
     try:
-        parser = argparse.ArgumentParser(description="display the sums of a text's \
-            upper-case characters, lower-case \
-            characters, punctuation characters, digits and spaces.")
+        parser = argparse.ArgumentParser(description="parse args")
         parser.add_argument("text", nargs="?", help="the text to be counted")
         args, extra_args = parser.parse_known_args()
         text = args.text
         if extra_args:
             raise AssertionError("Too much args, please put your text inside quotes!")
-        elif args.text is None:
-            text = input("What is the text to count?\n")
         return text
     except AssertionError as e:
         print(e)
@@ -28,7 +27,12 @@ def get_line() -> str :
 
 
 def main():
+    """This program tends to count and display the sums of upper/lower case characters, 
+    punctuations, digits, and spaces in user input."""
     text = get_line()
+    if text is None:
+        print("What is the text to count?")
+        text = sys.stdin.read()
     char = len(text)
     upper = 0
     lower = 0
@@ -41,7 +45,7 @@ def main():
             upper += 1
         elif i.islower():
             lower += 1
-        elif i.isspace():
+        elif i.isspace():# or i == '\n':
             space += 1
         elif i.isdigit():
             digit += 1
