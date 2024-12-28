@@ -12,22 +12,18 @@ class ThrowingArgumentParser(argparse.ArgumentParser):
     def error(self, message):
         raise AssertionError("Bad args!")
 
-def valid_str(value):
-    for char in value:
-        if not (char.isalnum() or char==' '):
-            raise AssertionError("bad str")
-    return value
-
 def main():
     try:
+        valid_str = lambda value: value if all(char.isalnum() or char==' ' for char in value) else AssertionError("bad str")
         parser = ThrowingArgumentParser()
-        parser.add_argument("string", valid_str)
+        parser.add_argument("string", type=valid_str)
         parser.add_argument("integer", type=int)
         args = parser.parse_args()
-        print(args)
+        words = args.string.split(' ')
+        result = [word for word in words if len(word) > args.integer]
+        print(result)
     except AssertionError as e:
         print(e)
-    return(0)
 
 
 if __name__ == "__main__":
