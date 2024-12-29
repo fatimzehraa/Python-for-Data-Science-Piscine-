@@ -11,8 +11,15 @@ class AssertionError(Exception):
 class ThrowingArgumentParser(argparse.ArgumentParser):
     def error(self, message):
         raise AssertionError("Bad args!")
+    
+# def valid_str(value):
+#     if not all(char.isalnum() or char==' ' for char in value):
+#         raise AssertionError("bad str")
+#     return value
 
 def main():
+    """Filters words in a string by length.
+    """
     try:
         valid_str = lambda value: value if all(char.isalnum() or char==' ' for char in value) else AssertionError("bad str")
         parser = ThrowingArgumentParser()
