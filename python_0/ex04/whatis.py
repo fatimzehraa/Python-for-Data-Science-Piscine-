@@ -1,7 +1,7 @@
-
 import sys
 
-#sys.tracebacklimit = 0
+# sys.tracebacklimit = 0
+
 
 class AssertionError(Exception):
     def __init__(self, message):
@@ -10,6 +10,7 @@ class AssertionError(Exception):
 
     def __str__(self):
         return f"AssertionError: {self.message}"
+
 
 if len(sys.argv) == 1:
     exit()
@@ -27,4 +28,3 @@ try:
         raise AssertionError("argument is not an integer") from None
 except AssertionError as e:
     print(e)
-

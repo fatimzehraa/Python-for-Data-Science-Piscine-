@@ -1,10 +1,11 @@
 def is_nan(value):
     return value != value
 
+
 def NULL_not_found(object: any) -> int:
     typeee = type(object)
     name = ""
-    if object == None:
+    if object is None:
         name = "Nothing"
     elif is_nan(object):
         name = "Cheese"
@@ -12,7 +13,7 @@ def NULL_not_found(object: any) -> int:
         return 0
     elif typeee.__name__ == "int" and object == 0:
         name = "Zero"
-    elif object == '':
+    elif object == "":
         name = "Empty"
     elif not object:
         name = "Fake"
@@ -22,9 +23,6 @@ def NULL_not_found(object: any) -> int:
     else:
         print(f"{name}: {object} {typeee}")
         return 0
-
-
-
 
 
 # Nothing = None

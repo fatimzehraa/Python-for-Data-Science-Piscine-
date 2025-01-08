@@ -1,5 +1,6 @@
 BLOCK_CHAR = "▉"
 
+
 def ft_tqdm(lst: range) -> None:
     """Prints a progress bar for a given iterable."""
 
