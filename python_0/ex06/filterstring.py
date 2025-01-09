@@ -15,10 +15,8 @@ class ThrowingArgumentParser(argparse.ArgumentParser):
         raise AssertionError("Bad args!")
 
 
-# def valid_str(value):
-#     if not all(char.isalnum() or char==' ' for char in value):
-#         raise AssertionError("bad str")
-#     return value
+def raise_error(err):
+    raise AssertionError(err)
 
 
 def main():
@@ -27,7 +25,7 @@ def main():
         valid_str = lambda value: (
             value
             if all(char.isalnum() or char == " " for char in value)
-            else AssertionError("bad str")
+            else raise_error("bad str")
         )
         parser = ThrowingArgumentParser()
         parser.add_argument("string", type=valid_str)

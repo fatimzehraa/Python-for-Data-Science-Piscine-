@@ -1,15 +1,3 @@
-# def function
-#
-# sequence = [a,b,c,d]
-#
-# Syntax:
-#   filter(function, sequence)
-
-
-def is_even(x):
-    return x % 2 == 0
-
-
 def ft_filter(function, iterable):
     """filter(function or None, iterable) --> filter object
 

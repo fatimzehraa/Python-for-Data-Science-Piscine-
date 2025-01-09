@@ -13,7 +13,7 @@ class AssertionError(Exception):
 
 def get_line() -> str:
     """get_line(): parses text to be counted as argument using argparse,\
-        and throws AssertionError if more than one argument is provided."""
+and throws AssertionError if more than one argument is provided."""
     try:
         parser = argparse.ArgumentParser(description="parse args")
         parser.add_argument("text", nargs="?", help="the text to be counted")
@@ -21,8 +21,7 @@ def get_line() -> str:
         text = args.text
         if extra_args:
             raise AssertionError(
-                "Too much args, please put your text\
-                inside quotes!"
+                "Too much args, please put your text inside quotes!"
             )
         return text
     except AssertionError as e:
@@ -32,7 +31,7 @@ def get_line() -> str:
 
 def main():
     """This program tends to count and display the sums of upper/lower
-    case characters, punctuations, digits, and spaces in user input."""
+case characters, punctuations, digits, and spaces in user input."""
     text = get_line()
     if text is None:
         print("What is the text to count?")
