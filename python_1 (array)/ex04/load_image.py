@@ -11,7 +11,7 @@ class AssertionError(Exception):
         return f"AssertionError: {self.message} {self.path}"
 
 def ft_load(path: str) :    #(you can return to the desired format)
-    """Load an image from a file and return it as an array."""
+    """Load an image from a file and return a square of 10x10 pixels from the image."""
     try:
         if not path.lower().endswith(('.jpg', '.jpeg')):
             raise AssertionError("File format not supported")
@@ -27,5 +27,4 @@ def ft_load(path: str) :    #(you can return to the desired format)
         exit()
     
 
-# print(ft_load("./sunflower.jpg"))
-print(ft_load("./landscape.jpg"))
+print(ft_load("./animal.jpeg"))
