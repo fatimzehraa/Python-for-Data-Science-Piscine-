@@ -1,54 +1,40 @@
 import sys
-from PIL import Image
 from load_image import ft_load, AssertionError
+from PIL import Image
+import matplotlib.pyplot as plt
 import numpy as np
 
-def crop_image(img):
-    """Crop an image to a square on the center."""
-    new_size = min(img.size)
-    left = (img.size[0] - new_size) / 2
-    top = (img.size[1] - new_size) / 2
-    right = (img.size[0] + new_size) / 2
-    bottom = (img.size[1] + new_size) / 2
-    return img.crop((left, top, right, bottom))
-
-def rotate_image(image):
-    """Rotate an image by 90 degrees clockwise using transpose method."""
-    # ro_ig = [[array_img[j][i] for j in range(len(array_img))] for i in range(len(array_img[0]))]
-    # return Image.fromarray(ro_ig, 'RGB')
-    width, height = image.size
-    transposed_image = Image.new("RGB", (height, width))
-
-    for y in range(height):
-        for x in range(width):
-            pixel = image.getpixel((x, y))
-            transposed_image.putpixel((y, x), pixel)
-
-    return transposed_image
-
+def transpose_array(array):
+    """rotate array"""
+    return [[array[j][i] for j in range(len(array))] for i in range(len(array[0]))]
 def main():
     """this program tends to crop an image, load it and rotate it, then save it in a new file."""
-    path = sys.argv[1]
-    # parse the path to the image
     try:
-        if not path.lower().endswith(('.jpg', '.jpeg')):
-            raise AssertionError("File format not supported")
-        elif not path:
-            raise AssertionError("No file path provided")
-        img = Image.open(path)
-        if not img:
+        try:
+            path = sys.argv[1]
+        except IndexError:
+            raise AssertionError("No args") from None
+        img = ft_load(path)
+        image = Image.open(path)
+        if not image:
             raise AssertionError("File not found", path)
-        # crop the image and save it
-        cropped_img = crop_image(img)
-        new_path = "cropped_" + path
-        cropped_img.save(new_path)
-        print(f"Image cropped and saved as {new_path}")
-        # rotate it
-        rotated_img = rotate_image(cropped_img)
-        rotated_img.show()
+        gray_img = image.convert("L")
+        zoomed_img = gray_img.crop((450, 100, 850, 500))
+        zoomed_array = np.array(zoomed_img)
+        zoomed_array_explicite = zoomed_array[:,:,np.newaxis]
+        print(f"Image shape: {zoomed_array_explicite.shape} or {zoomed_array.shape}")
+        print(zoomed_array_explicite)
+        # rotated_img = rotate_image(zoomed_img)
+        transposed_array = np.asarray(transpose_array(zoomed_array))
+        transposed_image = Image.fromarray(transposed_array)
+        print(f"New image shape: {transposed_array.shape}")
+        print(transposed_array)
+        plt.imshow(transposed_image, cmap="gray")
+        plt.show()
     except AssertionError as e:
         print(e)
         exit()
     
+
 if __name__ == "__main__":
     main()
