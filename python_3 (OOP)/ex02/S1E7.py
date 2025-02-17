@@ -6,7 +6,7 @@ class Baratheon(Character):
     """
     def __init__(self, first_name, is_alive=True):
         """gives birth to a Baratheon member with a given name"""
-        # super.__init__(self, first_name, is_alive)
+        super().__init__(first_name, is_alive=True)
         self.first_name = first_name
         self.is_alive = is_alive
         self.family_name = "Baratheon"
@@ -33,6 +33,7 @@ class Lannister(Character):
     """
     def __init__(self, first_name, is_alive=True):
         """gives birth to a Lannister member with a given name"""
+        super().__init__(first_name, is_alive=True)
         self.first_name = first_name
         self.is_alive = is_alive
         self.family_name = "Lannister"

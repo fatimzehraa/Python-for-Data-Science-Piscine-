@@ -6,7 +6,7 @@ class Baratheon(Character):
     """
     def __init__(self, first_name, is_alive=True):
         """gives birth to a Baratheon member with a given name"""
-        # super.__init__(self, first_name, is_alive)
+        super().__init__(first_name, is_alive=True)
         self.first_name = first_name
         self.is_alive = is_alive
         self.family_name = "Baratheon"
@@ -33,6 +33,7 @@ class Lannister(Character):
     """
     def __init__(self, first_name, is_alive=True):
         """gives birth to a Lannister member with a given name"""
+        super().__init__(first_name, is_alive=True)
         self.first_name = first_name
         self.is_alive = is_alive
         self.family_name = "Lannister"
@@ -53,3 +54,20 @@ class Lannister(Character):
         instance = cls(first_name)
         instance.is_alive = is_alive
         return instance
+
+Robert = Baratheon("Robert")
+print(Robert.__dict__)
+print(Robert.__str__)
+print(Robert.__repr__)
+print(Robert.is_alive)
+Robert.die()
+print(Robert.is_alive)
+print(Robert.__doc__)
+print("---")
+Cersei = Lannister("Cersei")
+print(Cersei.__dict__)
+print(Cersei.__str__)
+print(Cersei.is_alive)
+print("---")
+Jaine = Lannister.create_lannister("Jaine", True)
+print(f"Name : {Jaine.first_name, type(Jaine).__name__}, Alive : {Jaine.is_alive}")
