@@ -1,7 +1,7 @@
-from load_image import ft_load, AssertionError
-from PIL import Image, ImageChops
+from load_image import ft_load
+from PIL import Image
 import array
-import numpy as np
+
 
 def ft_invert(array):
     """Inverts the color of the image received"""
@@ -9,45 +9,38 @@ def ft_invert(array):
     inverted_image = Image.fromarray(inverted_array)
     inverted_image.show()
     return inverted_array
-    
+
+
 def ft_red(array) -> array:
     """Apply red filter on the image received"""
-    red_channel = array[:,:,0]
+    red_channel = array[:, :, 0]
     image = 0 * array
-    image[:,:,0] = red_channel
+    image[:, :, 0] = red_channel
     red_image = Image.fromarray(image)
     red_image.show()
     return image
-    
+
+
 def ft_green(array) -> array:
     """Apply green filter on the image received"""
-    array[:,:,:1] = 0
-    array[:,:,:-2:-1] = 0
+    array[:, :, :1] = 0
+    array[:, :, :-2:-1] = 0
     green_image = Image.fromarray(array)
     green_image.show()
     return array
 
+
 def ft_blue(array) -> array:
     """Apply blue filter on the image received"""
-    #only operator allowed for this function is the assignment operator =
-    array[:,:,:2] = 0
+    # only operator allowed for this function is the assignment operator =
+    array[:, :, :2] = 0
     blue_image = Image.fromarray(array)
     blue_image.show()
     return array
+
 
 def ft_grey(array) -> array:
     """Apply grey filter on the image received"""
     image = Image.fromarray(array)
     image.convert("L").show()
     return array
-
-array = ft_load("landscape.jpg")
-
-# print(array.shape)
-
-#print(array[0:2:2])
-# ft_invert(array)
-# ft_red(array)
-# ft_green(array)
-ft_blue(array)
-# ft_grey(array)

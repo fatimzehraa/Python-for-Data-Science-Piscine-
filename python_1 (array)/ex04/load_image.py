@@ -1,6 +1,7 @@
 import imageio as io
 import numpy as np
 
+
 class AssertionError(Exception):
     def __init__(self, message, path=None):
         self.message = message
@@ -10,7 +11,8 @@ class AssertionError(Exception):
     def __str__(self):
         return f"AssertionError: {self.message} {self.path}"
 
-def ft_load(path: str) :    #(you can return to the desired format)
+
+def ft_load(path: str):
     """Load an image from a file and return it as an array."""
     try:
         if not path.lower().endswith(('.jpg', '.jpeg')):
