@@ -3,6 +3,7 @@ import sys
 import os
 from matplotlib import pyplot as plt
 
+
 def main():
     try:
         if len(sys.argv) != 2:
