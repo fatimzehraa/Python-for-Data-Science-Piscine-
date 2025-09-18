@@ -15,12 +15,12 @@ def main():
         data = load(sys.argv[1])
         c = "country"
         country = data[(data[c] == "Morocco") | (data[c] == "France")]
-        print(country)
+        # print(country)
         country = country.drop(columns=[c]).set_index(country[c].values).T
         # print(f"country index: {country.axes}")
         # country.index = country.index.astype(int)
         country = country.apply(lambda col: col.str.replace("M", "").astype(float) * 1_000_000)
-        print(f"new table: \n{country}")
+        # print(f"new table: \n{country}")
         _title = "Population in Morocco and France"
         country.plot(xlabel="year", ylabel="population", title=_title)
         plt.show()

@@ -1,9 +1,9 @@
-import sys
 import pandas as pd
 
+
 def load(path: str):
-    """function that takes a path as argument, writes the dimensions of the data set
-and returns it."""
+    """function that takes a path as argument,
+    writes the dimensions of the data set and returns it."""
     try:
         if not path:
             raise AssertionError("No file path provided")
@@ -17,5 +17,3 @@ and returns it."""
     except AssertionError as e:
         print(e)
         exit()
-        
-# print(load(sys.argv[1]))
